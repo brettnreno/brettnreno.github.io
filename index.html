@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Brett Lambert Cover Letter</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+
+  </head>
+  <body>
+
+  <style>
+    body {
+      font-family: Helvetica;
+      padding: 0;
+      margin: 0;
+      background-color: #777373;
+    }
+    .col {
+      text-align: center;
+      position:relative;
+      width: 80%;
+      margin: 0 auto;
+    }
+    .col-left > div {
+      position: relative;
+      margin-top: 20px;
+      z-index: 99;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .col-left:after {
+      content: " ";
+      position: absolute;
+      top: 12px;
+      width: 84%;
+      background: #a1e961;
+      height: 3px;
+      left: 49%;
+      margin-left: -41%;
+    }
+    .col-right {
+      margin-top: 50px;
+    }
+    .section {
+      transition: opacity 0.3s;
+      margin: 0 auto;
+      position:absolute;
+      top: -3000%;
+      left: 50%;
+      margin-left: -50%;
+      opacity: 0;
+    }
+    .section--active {
+      opacity:1;
+      top: 15%;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      line-height: 1.3rem;
+
+      font-weight: 300;
+      color: #faf0f0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .section h2 {
+      font-size: 2rem;
+      color: #a1e961;
+    }
+    .positioner-point {
+      cursor: pointer;
+      background: #a1e961;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      line-height: 15px;
+      margin: auto;
+    }
+    .positioner-point:hover {
+      background: #9b9b9b;
+      transition: background 0.3s;
+    }
+    .positioner--active {
+      width: 25px;
+      height: 25px;
+      cursor:auto;
+      background: #a1e961;
+    }
+    .positioner--active:hover {
+      background: #a1e961;
+      width: 25px;
+      height: 25px;
+    }
+    .fa {
+      font-size: 6rem;
+      margin-top: 30px;
+      color: #a1e961;
+    }
+
+    @media (min-width: 768px) {
+      .section {
+        width: 100%;
+      }
+      .section p {
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+        margin-bottom: 100px;
+      }
+      .col {
+        width: 70%;
+        margin: 0 auto;
+      }
+      .col-right {
+        padding-top: 15%
+      }
+      body {
+        padding-top: 6%;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .col {
+        width: 60%;
+      }
+    }
+
+  </style>
+    <div id="root"></div>
+    <script type="text/babel">
+
+
+      class Section extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+          return (
+            <div className={`section ${this.props.isActive ? 'section--active': ''}`}>
+              <i className={`fa ${this.props.icon}`}></i>
+              <h2>{this.props.heading}</h2>
+              <p>{this.props.content}</p>
+            </div>
+          );
+        }
+      }
+
+      class Positioner extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+          return (
+            <div>
+              {this.props.state.sections.map(section => (
+                <div className={`positioner-point ${section.isActive ? 'positioner--active': ''}`} key={`button-${section.id}`} onClick={() => {this.props.onClick(section.id)}}></div>
+                ))}
+            </div>
+          );
+        }
+      }
+
+
+      class Cover extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            sections: [
+              {
+                title: 'intro',
+                content: 'My name is Brett Lambert. I am an energy management and building automation specialist.',
+                id: 1,
+                isActive: true,
+                icon: 'fa-grin-beam',
+                heading: 'Hello!'
+              },
+              {
+                title: 'about',
+                content: 'I have been in the HVAC industry since 1998.  Over the years I have had many roles encompassing all different aspects of building trades as it relates to mechanical and electrical portions of the building trades.  I started my dealings with building controls and energy management early in my career and for the past 9 years it has been my sole focus.',
+                id: 2,
+                isActive: false,
+                icon: 'fa-cogs',
+                heading: 'About me'
+              },
+              /*{
+                title: 'interest',
+                content: 'I am interested in the Commissioning / Retro-commissioning Engineer position that you have listed as open on your website.  I came across the job openings for your company this morning and thought to myself, "this would be the perfect opportunity to showcase the talent and skills I have acquired over the past 20 years and help customers with an ever growing need".',
+                id: 3,
+                isActive: false,
+                icon: 'fa-plug',
+                heading: 'I\'m interested'
+              },
+              */{
+                title: 'considerations',
+                content: 'I believe my past experiences can be a valuable asset to your company by providing my years of experience in energy management.  I can provide hands on experience with a multitude of different automation platforms to your companies offerings for the clients to assure them that they are getting the best investment for their building. ',
+                id: 4,
+                isActive: false,
+                icon: 'fa-bolt',
+                heading: 'Considerations'
+              },
+              {
+                title: 'forward',
+                content: 'I am very interested in learning more about your team, how you work, and the types of projects you handle. I have several ideas as well on ways to grow your business if interested.',
+                id: 5,
+                isActive: false,
+                icon: 'fa-cubes',
+                heading: 'Opportunity'
+              },
+              {
+                title: 'closing',
+                content: 'I look forward to discussing employment and future collaboration efforts with you and I thank you for your time!  Please follow the link at the bottom of the page to my current resume.  -Brett Lambert ',
+                id: 6,
+                isActive: false,
+                icon: 'fa-handshake',
+                heading: 'Thank you'
+              }
+            ]
+          };
+        }
+
+        makeActive (clickedId) {
+          const clonedSections = [...this.state.sections];
+
+          clonedSections.forEach(section => {
+            section.isActive = false;
+          });
+
+          const clickedSection = clonedSections.find(section => section.id === clickedId);
+
+          clickedSection.isActive = true;
+
+          this.setState({ sections: clonedSections });
+        }
+
+
+        render () {
+          return (
+            <div className="row">
+              <div className="col col-left">
+                <Positioner
+                  state={this.state}
+                  onClick={id => (this.makeActive(id))} />
+              </div>
+              <div className="col col-right">
+                {this.state.sections.map(section => (
+                  <Section
+                    key={section.id}
+                    content={section.content}
+                    isActive={section.isActive}
+                    id={section.id}
+                    icon={section.icon}
+                    heading={section.heading}/>
+                ))}
+              </div>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <Cover />,
+        document.getElementById('root')
+      );
+
+    </script>
+
+  </body>
+  <footer>
+    <center>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <input type="button" onclick="location.href='https://brettnreno.github.io/resume';" value="My Resume" />
+    </footer>
+</html>
